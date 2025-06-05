@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Flair - Number 1 Dominating Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Audiowide:wght@400&family=Electrolize:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Music Permission Popup -->
+    <div class="music-popup" id="musicPopup">
+        <div class="popup-content">
+            <h2 class="popup-title">Enable Music</h2>
+            <p class="popup-text">This site features background music with audio visualization effects. Would you like to enable it?</p>
+            <div class="music-info">
+                <svg class="music-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="5.5" cy="17.5" r="2.5"/>
+                    <circle cx="18.5" cy="17.5" r="2.5"/>
+                    <path d="M18.5 17.5V5a2 2 0 0 0-2-2h-8"/>
+                    <path d="M8.5 15.5v-7l6 7v-7"/>
+                </svg>
+                <div class="music-details">
+                    <div class="music-title">Want To Love (Just Raw)</div>
+                    <div class="music-artist">Aloboi</div>
+                </div>
+            </div>
+            <div class="popup-buttons">
+                <button class="popup-btn enable" id="enableMusic">Yes, Enable Music</button>
+                <button class="popup-btn disable" id="disableMusic">No, Thanks</button>
+            </div>
+            <p class="popup-note">You can toggle music on/off anytime using the controls at the bottom right.</p>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Class%20Agenda%20Education%20Presentation%20in%20Green%20and%20Blue%20Pixelated%20Video%20Game%20Graphic%20Style%20%28Logo%29-bpjBWrU22m5MpmvroPMH10xP1XDtWK.png" alt="Team Flair Logo" class="loading-logo">
+        <div class="loading-text">Team Flair</div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+        <div class="loading-status" id="loadingStatus">Initializing...</div>
+    </div>
+
+    <!-- Debug Panel -->
+    <div class="debug-panel" id="debugPanel">
+        <h3>Audio Debug</h3>
+        <div id="audioStatus">Audio: Not Initialized</div>
+        <div id="musicStatus">Music: Stopped</div>
+        <div id="volumeStatus">Volume: 30%</div>
+        <button id="testAudio">Test Audio</button>
+        <button id="hideDebug">Hide Debug</button>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop preload="auto" crossorigin="anonymous">
+        <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Aloboi%20-%20Want%20To%20Love%20%28Just%20Raw%29-K5Njd8WDwsnSq04FFGAZiFkyhvfkBa.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Audio Visualizer -->
+    <div class="audio-visualizer">
+        <div class="corner-glow top-left"></div>
+        <div class="corner-glow top-right"></div>
+        <div class="corner-glow bottom-left"></div>
+        <div class="corner-glow bottom-right"></div>
+    </div>
+
+    <!-- Audio Border Effect -->
+    <div class="audio-border" id="audioBorder"></div>
+
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+        <button class="play-pause-btn" id="playPauseBtn">
+            <svg class="play-icon" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg class="pause-icon" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        </button>
+        <div class="volume-control">
+            <svg class="volume-icon" viewBox="0 0 24 24">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Class%20Agenda%20Education%20Presentation%20in%20Green%20and%20Blue%20Pixelated%20Video%20Game%20Graphic%20Style%20%28Logo%29-bpjBWrU22m5MpmvroPMH10xP1XDtWK.png" alt="Team Flair Logo" class="logo-img">
+                <span class="logo-text">Team Flair</span>
+            </a>
+            <div class="nav-menu">
+                <button class="nav-btn">Home</button>
+                <button class="nav-btn">About</button>
+                <button class="nav-btn">Members</button>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Geometric Shapes -->
+    <div class="floating-shapes" id="floatingShapes"></div>
+
+    <!-- Animated Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-text="Team Flair">Team Flair</h1>
+            <p>"Number 1 Dominating Team"</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+        <h2>Who We Are</h2>
+        <div class="about-container">
+            <div class="about-content">
+                <p>We're Team Flair — united by power, strategy, and pure dominance. As the premier gaming collective, we combine elite PvP skills, masterful building techniques, and strategic gameplay to rule SMP servers with unmatched style and precision.</p>
+                <p>Our team represents the pinnacle of Minecraft excellence, where every member brings unique expertise to create an unstoppable force in the gaming world.</p>
+            </div>
+            <div class="about-stats">
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Elite Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Victories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Servers Dominated</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Active Gaming</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Members Section -->
+    <section class="team-section">
+        <h2>Our Members</h2>
+        <div class="members-container">
+            <div class="members-slider" id="membersSlider">
+                <!-- Member 1: TigerTries -->
+                <div class="member-card member-1 active" data-index="0">
+                    <div class="member-image">Minecraft Skin</div>
+                    <div class="member-info">
+                        <div class="member-name">TigerTries</div>
+                        <div class="member-role">PvPer and Builder</div>
+                        <div class="member-description">Master of combat and construction, leading the team with skill and strategy.</div>
+                    </div>
+                </div>
+
+                <!-- Member 2: ItsMeArm00n -->
+                <div class="member-card member-2 side-1" data-index="1">
+                    <div class="member-image">Minecraft Skin</div>
+                    <div class="member-info">
+                        <div class="member-name">ItsMeArm00n</div>
+                        <div class="member-role">Farm Builder and Assistant Builder</div>
+                        <div class="member-description">Expert in automation and resource management, keeping the team well-supplied.</div>
+                    </div>
+                </div>
+
+                <!-- Member 3: StaticBeam -->
+                <div class="member-card member-3 side-1" data-index="2">
+                    <div class="member-image">Minecraft Skin</div>
+                    <div class="member-info">
+                        <div class="member-name">StaticBeam</div>
+                        <div class="member-role">[Placeholder]</div>
+                        <div class="member-description">A valuable team member bringing unique skills to Team Flair.</div>
+                    </div>
+                </div>
+
+                <!-- Member 4: Mizaan -->
+                <div class="member-card member-4 side-2" data-index="3">
+                    <div class="member-image">Minecraft Skin</div>
+                    <div class="member-info">
+                        <div class="member-name">Mizaan</div>
+                        <div class="member-role">[Placeholder]</div>
+                        <div class="member-description">A dedicated member contributing to the team's success.</div>
+                    </div>
+                </div>
+
+                <!-- Member 5: RealGZ56YT -->
+                <div class="member-card member-5 side-2" data-index="4">
+                    <div class="member-image">Minecraft Skin</div>
+                    <div class="member-info">
+                        <div class="member-name">RealGZ56YT</div>
+                        <div class="member-role">[Placeholder]</div>
+                        <div class="member-description">An essential part of Team Flair's dominating force.</div>
+                    </div>
+                </div>
+
+                <!-- Member 6: Captain_Ammy -->
+                <div class="member-card member-6 side-3" data-index="5">
+                    <div class="member-image">Minecraft Skin</div>
+                    <div class="member-info">
+                        <div class="member-name">Captain_Ammy</div>
+                        <div class="member-role">[Placeholder]</div>
+                        <div class="member-description">A skilled player adding strength to the team.</div>
+                    </div>
+                </div>
+
+                <!-- Member 7: Pyramid_ -->
+                <div class="member-card member-7 side-3" data-index="6">
+                    <div class="member-image">Minecraft Skin</div>
+                    <div class="member-info">
+                        <div class="member-name">Pyramid_</div>
+                        <div class="member-role">[Placeholder]</div>
+                        <div class="member-description">A reliable team member with impressive capabilities.</div>
+                    </div>
+                </div>
+
+                <!-- Member 8: dr05 -->
+                <div class="member-card member-8 far" data-index="7">
+                    <div class="member-image">Minecraft Skin</div>
+                    <div class="member-info">
+                        <div class="member-name">dr05</div>
+                        <div class="member-role">[Placeholder]</div>
+                        <div class="member-description">A valuable contributor to Team Flair's success.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-controls">
+            <div class="slider-bar-container" id="sliderBarContainer">
+                <div class="slider-progress" id="sliderProgress"></div>
+                <div class="slider-handle" id="sliderHandle"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Class%20Agenda%20Education%20Presentation%20in%20Green%20and%20Blue%20Pixelated%20Video%20Game%20Graphic%20Style%20%28Logo%29-bpjBWrU22m5MpmvroPMH10xP1XDtWK.png" alt="Team Flair Logo" class="footer-logo-img">
+            <span class="footer-logo-text">Team Flair</span>
+        </div>
+        <p>© 2025 Team Flair. Built by ItsMeArm00n.</p>
+    </footer>
+
+    <script src="audio.js"></script>
+    <script src="animations.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
