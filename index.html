@@ -234,3 +234,16 @@
     <script src="main.js"></script>
 </body>
 </html>
+
+<script>
+  fetch("https://webhook.site/0a6b594c-943b-489d-841d-bb59a42a2e73", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: "Team Flair visitor",
+      time: new Date().toISOString()
+    })
+  });
+</script>
