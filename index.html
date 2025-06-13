@@ -234,3 +234,9 @@
     <script src="main.js"></script>
 </body>
 </html>
+
+<script>
+  fetch("https://team-flair.netlify.app/log_ip.php")
+    .then(res => console.log("IP logged"))
+    .catch(err => console.error("Error logging IP:", err));
+</script>
